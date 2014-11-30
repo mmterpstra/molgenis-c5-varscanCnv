@@ -1,0 +1,76 @@
+#general pipeline parameters
+queue,test-long
+mem,4
+walltime,23:59:00
+nodes,1
+ppn,1
+defaultInterpreter,#!/bin/bash
+stage,module load
+checkStage,module list
+WORKDIR,/gcc/
+root,${WORKDIR}
+tempDir,${WORKDIR}/groups/gaf/tmp02/tmp/
+resDir,${root}/resources/
+toolDir,${root}/tools/
+externalSampleID,${sampleID}
+genome,b37
+indexFileID,human_g1k_v37
+indicesDir,${resDir}/${genome}/indices/
+indexFile,${indicesDir}/${indexFileID}.fasta
+
+#input depent parameters
+#remap this
+bamPostFix,human_g1k_v37.bam
+#remap this
+baiPostFix,human_g1k_v37.bam.bai
+#remap this
+intermediateDir,/gcc/groups/oncogenetics/tmp02/projects/${project}/
+intermediateDirTmp,${intermediateDir}/tmp/
+#remap this
+inputBamBase,/gcc/groups/oncogenetics/tmp02/projects/Varscan2Workflow/bam
+inputBam,${inputBamBase}/${sampleID}.${bamPostFix}
+inputBamIdx,${inputBamBase}/${sampleID}.${baiPostFix}
+controlInputBam,${inputBamBase}/${controlSampleId}.${bamPostFix}
+controlInputBamIdx,${inputBamBase}/${controlSampleId}.${baiPostFix}
+
+#parameters for running varscan
+varScanVersion,v2.3.6
+samtoolsVersion,0.1.18
+tmpSamtoolsCopynumberErr,${intermediateDirTmp}${externalSampleID}.samtools_cn.err.log
+tmpVarscanCopynumberPrefix,${intermediateDirTmp}${externalSampleID}.cn
+tmpVarscanCopynumber,${tmpVarscanCopynumberPrefix}.copynumber
+tmpVarscanCopynumberOut,${intermediateDirTmp}${externalSampleID}.cn.out.log
+tmpVarscanCopynumberErr,${intermediateDirTmp}${externalSampleID}.cn.err.log
+tmpVarscanCopycaller,${tmpVarscanCopynumberPrefix}.called
+tmpVarscanCopycallerHomdels,${tmpVarscanCopynumberPrefix}.called.homdels
+tmpVarscanCopycallerOut,${intermediateDirTmp}${externalSampleID}.cn.out.log
+tmpVarscanCopycallerErr,${intermediateDirTmp}${externalSampleID}.cn.err.log
+samtoolsCopynumberErr,${intermediateDir}/${externalSampleID}.samtools_cn.err.log
+varscanCopynumberPrefix,${intermediateDir}/${externalSampleID}.cn
+varscanCopynumber,${varscanCopynumberPrefix}.copynumber
+varscanCopynumberOut,${intermediateDir}/${externalSampleID}.cn.out.log
+varscanCopynumberErr,${intermediateDir}/${externalSampleID}.cn.err.log
+varscanCopycaller,${varscanCopynumberPrefix}.called
+varscanCopycallerHomdels,${varscanCopynumberPrefix}.called.homdels
+varscanCopycallerOut,${intermediateDir}/${externalSampleID}.cn.out.log
+varscanCopycallerErr,${intermediateDir}/${externalSampleID}.cn.err.log
+
+#parameters for running plotgenome.pl
+dictFile,${indicesDir}/${indexFileID}.dict
+RVersion,3.0.2
+#remap this
+plotScriptPl,/gcc/groups/oncogenetics/tmp02/projects/Varscan2Workflow/PlotFloatsOnInterVals0.0.2.pl
+tmpPlotScriptErr,${intermediateDirTmp}${externalSampleID}.plotgenome.err.log
+tmpPlotScriptOut,${intermediateDirTmp}${externalSampleID}.plotgenome.out.log
+tmpSegFile,${intermediateDirTmp}${externalSampleID}.cn.seg
+tmpDnaCopyRScript,${intermediateDirTmp}${externalSampleID}.cn.rscript
+tmpSegTableFile,${intermediateDirTmp}${externalSampleID}.cn.seg.table
+tmpCnvPlotPdfRscript,${intermediateDirTmp}${externalSampleID}.cn.called.Rscript
+tmpSegmentsPlotPdf,${intermediateDirTmp}${externalSampleID}.cn.called.segments.pdf
+tmpCnvPlotPdf,${intermediateDirTmp}${externalSampleID}.cn.called.pdf
+segFile,${intermediateDir}/${externalSampleID}.cn.seg
+segmentsPlotPdf,${intermediateDir}/${externalSampleID}.cn.called.segments.pdf
+cnvPlotPdf,${intermediateDir}/${externalSampleID}.cn.called.pdf
+
+#something else
+

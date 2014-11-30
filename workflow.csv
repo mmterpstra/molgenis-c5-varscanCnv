@@ -1,0 +1,3 @@
+step,protocol,dependencies
+Varscan2,protocols/Varscan2.sh,
+Plotgenome,protocols/Plotgenome.sh,Varscan2
